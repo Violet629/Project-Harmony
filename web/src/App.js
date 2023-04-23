@@ -1,6 +1,8 @@
 /*eslint-disable*/
 import "./App.css";
 import { useState } from "react";
+import axios from "axios";
+
 // import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 function App() {
@@ -11,7 +13,26 @@ function App() {
     } else {
       setPage(true);
     }
+    axios
+      .get("/users")
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
+
+  // axios.post('/api/users', {
+  //   firstName: 'John',
+  //   lastName: 'Doe'
+  // })
+  // .then(function (response) {
+  //   console.log(response);
+  // })
+  // .catch(function (error) {
+  //   console.log(error);
+  // });
   return (
     <div className="App">
       {page ? (
@@ -24,7 +45,7 @@ function App() {
                 class="login-id"
                 placeholder="ID"
                 autocomplete="off"
-                name="id"
+                name="username"
               />
             </div>
             <div className="pw-input">
@@ -32,7 +53,7 @@ function App() {
                 type="password"
                 class="login-pw"
                 placeholder="Password"
-                name="pw"
+                name="password"
               />
             </div>
             <div className="button">
