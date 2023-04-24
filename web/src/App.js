@@ -11,24 +11,29 @@ function App() {
     setInputValue(event.target.value);
     // console.log(event.target.value);
   };
-  // axios
-  //   .get("/users")
-  //   .then(function (response) {
-  //     console.log(response);
-  //   })
-  //   .catch(function (error) {
-  //     console.log(error);
-  //   });
-  // axios.post('/api/users', {
-  //   firstName: 'John',
-  //   lastName: 'Doe'
-  // })
-  // .then(function (response) {
-  //   console.log(response);
-  // })
-  // .catch(function (error) {
-  //   console.log(error);
-  // });
+  function getTest() {
+    axios
+      .get("http://localhost:8080/getData")
+      .then(function (response) {
+        console.log(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+  function addTest() {
+    axios
+      .post("http://localhost:8080/addData", {
+        inputValue,
+      })
+      .then((response) => {
+        console.log("Data saved successfully!");
+      })
+      .catch((error) => {
+        console.error("Error saving data: ", error);
+      });
+  }
+
   return (
     <div className="App">
       <div className="container">
@@ -37,11 +42,11 @@ function App() {
           <input
             value={inputValue}
             onChange={input}
-            placeholder="text"
+            placeholder="할 일을 적어주세요"
             type="text"
           />
-          <button>Submit</button>
-          <p>{inputValue}</p>
+          <button onClick={addTest}>Submit</button>
+          {/* <p>{inputValue}</p> */}
         </div>
       </div>
     </div>
