@@ -18,8 +18,14 @@ app.get("/", (req, res) => {
   res.send("Hello World");
 });
 
-app.get("/users", function (req, res) {
-  connection.query("SELECT * FROM users", function (error, results, fields) {
+// app.get("/addData", function (req, res) {
+//   connection.query("SELECT * FROM todolist", function (error, results, fields) {
+//     if (error) throw error;
+//     res.send(results);
+//   });
+// });
+app.get("/getData", function (req, res) {
+  connection.query("SELECT * FROM todolist", function (error, results, fields) {
     if (error) throw error;
     res.send(results);
   });

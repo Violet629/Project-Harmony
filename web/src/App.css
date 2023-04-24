@@ -27,8 +27,8 @@
   border-radius: 8px;
   border: 1px solid rgba(153, 153, 153, 0.8);
 }
-.button-signin,
-.button-signup {
+.input input,
+.input button {
   font-family: "Roboto", sans-serif;
   display: inline-block;
   font-size: 18px;
