@@ -34,9 +34,26 @@ app.post("/addData", function (req, res) {
       res.status(500).send("Error saving data!");
       return;
     }
-    console.log("Data saved successfully!");
-    res.send("Data saved successfully!");
+    connection.query(
+      "SELECT * FROM todolist",
+      function (error, results, fields) {
+        if (error) throw error;
+        res.send(results);
+      }
+    );
   });
+});
+
+app.get("/deleteData", function (req, res) {
+  // const data = req.body.inputValue;
+  // console.log(req.body);
+  connection.query(
+    "DELETE FROM table_name WHERE id = 1",
+    (error, results, fields) => {
+      if (error) throw error;
+      res.send("Successfully deleted the row");
+    }
+  );
 });
 
 app.get("/", (req, res) => {

@@ -1,17 +1,13 @@
 /*eslint-disable*/
 import "./App.css";
 import { useState } from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
 
 // import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 function App() {
-  const [inputValue, setInputValue] = useState("");
-  const input = (event) => {
-    setInputValue(event.target.value);
-    // console.log(event.target.value);
-  };
-  function getTest() {
+  useEffect(() => {
     axios
       .get("http://localhost:8080/getData")
       .then(function (response) {
@@ -20,6 +16,17 @@ function App() {
       .catch(function (error) {
         console.log(error);
       });
+    // 페이지가 처음 로드될 때 실행할 함수
+  }, []); // 의존성 배열이 빈 배열이므로, 페이지가 처음 로드될 때 한 번만 실행됨
+
+  const [inputValue, setInputValue] = useState("");
+  const input = (event) => {
+    setInputValue(event.target.value);
+    // console.log(event.target.value);
+  };
+  const [todoList, setTodoList] = useState("");
+  function updateTodoList() {
+    setTodoList();
   }
   function addTest() {
     axios
@@ -27,6 +34,7 @@ function App() {
         inputValue,
       })
       .then((response) => {
+        console.log(response.data);
         console.log("Data saved successfully!");
       })
       .catch((error) => {
