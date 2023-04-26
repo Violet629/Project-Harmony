@@ -15,7 +15,8 @@ function App() {
   };
 
   const addData = (data) => {
-    setTodoList([...todoList, data]);
+    // console.log(data);
+    setTodoList([...data]);
   };
 
   function addTest() {
@@ -25,16 +26,31 @@ function App() {
       })
       .then((response) => {
         addData(response.data);
-        console.log(response.data);
-        console.log(todoList);
+        // console.log(response.data);
+        // console.log(todoList);
+        setInputValue("");
       })
       .catch((error) => {
         console.error("Error saving data: ", error);
       });
   }
-  function test() {
-    console.log(todoList[0]);
+  function deleteTest(index) {
+    console.log(index);
+    axios
+      .post("http://localhost:8080/deleteData", {
+        index,
+      })
+      .then((response) => {
+        // addData(response.data);
+        // console.log(todoList);
+      })
+      .catch((error) => {
+        console.error("Error saving data: ", error);
+      });
   }
+  // function test() {
+  //   console.log(todoList);
+  // }
   return (
     <div className="App">
       <div className="container">
@@ -47,13 +63,18 @@ function App() {
             type="text"
           />
           <button onClick={addTest}>Submit</button>
-          <button onClick={test}>test</button>
+          {/* <button onClick={test}>test</button> */}
+        </div>
+        <div className="todolist">
           {todoList.length === 0 ? (
-            <p>No data yet</p>
+            <p>No Data</p>
           ) : (
             <ul>
-              {todoList[0].map((item, index) => (
-                <li key={index}>{item.text}</li>
+              {todoList.map((item, index) => (
+                <li key={item.id}>
+                  {index + 1}. {item.text}
+                  <button onClick={deleteTest(index)}>X</button>
+                </li>
               ))}
             </ul>
           )}

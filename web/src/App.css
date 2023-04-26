@@ -46,3 +46,34 @@ button:hover {
   background-color: #000000;
   color: #ffffff;
 }
+.todolist ul {
+  font-family: "Roboto", sans-serif;
+  list-style: none;
+  padding: 0;
+}
+.todolist li {
+  border: 1px solid rgba(153, 153, 153, 0.8);
+  /* margin: 12px 0px 0px 12px; */
+  margin: 4px 0px;
+  padding: 8px 24px;
+  border-radius: 8px;
+  font-size: 18px;
+}
+.todolist p {
+  font-size: 18px;
+  font-family: "Roboto", sans-serif;
+}
+.todolist li button {
+  margin-left: 12px;
+  font-size: 18px;
+  border: 1px solid rgba(153, 153, 153, 0.8);
+  list-style: none;
+  text-decoration: none;
+  color: black;
+  background-color: #fff;
+  transition: background-color 0.5s, color 0.5s;
+}
+.todolist li button:hover {
+  background-color: #000000;
+  color: #ffffff;
+}

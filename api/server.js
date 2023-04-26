@@ -48,23 +48,29 @@ app.post("/addData", function (req, res) {
       "SELECT * FROM todolist",
       function (error, results, fields) {
         if (error) throw error;
+        console.log(results);
         res.send(results);
       }
     );
   });
 });
 
-// app.get("/deleteData", function (req, res) {
-//   // const data = req.body.inputValue;
-//   // console.log(req.body);
-//   connection.query(
-//     "DELETE FROM table_name WHERE id = 1",
-//     (error, results, fields) => {
-//       if (error) throw error;
-//       res.send("Successfully deleted the row");
-//     }
-//   );
-// });
+app.post("/deleteData", function (req, res) {
+  // const data = req.body.inputValue;
+  console.log(req.body.test);
+  res.send("ok");
+  // connection.query("SELECT * FROM todolist", function (error, results, fields) {
+  //   if (error) throw error;
+  //   res.send(results);
+  // });
+  // connection.query(
+  //   "DELETE FROM table_name WHERE id = 1",
+  //   (error, results, fields) => {
+  //     if (error) throw error;
+  //     res.send("Successfully deleted the row");
+  //   }
+  // );
+});
 
 app.get("/", (req, res) => {
   res.send("Hello World");
