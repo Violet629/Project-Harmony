@@ -7,41 +7,34 @@ import axios from "axios";
 // import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 function App() {
-  useEffect(() => {
-    axios
-      .get("http://localhost:8080/getData")
-      .then(function (response) {
-        console.log(response.data);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-    // 페이지가 처음 로드될 때 실행할 함수
-  }, []); // 의존성 배열이 빈 배열이므로, 페이지가 처음 로드될 때 한 번만 실행됨
-
   const [inputValue, setInputValue] = useState("");
+  const [todoList, setTodoList] = useState([]);
+
   const input = (event) => {
     setInputValue(event.target.value);
-    // console.log(event.target.value);
   };
-  const [todoList, setTodoList] = useState("");
-  function updateTodoList() {
-    setTodoList();
-  }
+
+  const addData = (data) => {
+    setTodoList([...todoList, data]);
+  };
+
   function addTest() {
     axios
       .post("http://localhost:8080/addData", {
         inputValue,
       })
       .then((response) => {
+        addData(response.data);
         console.log(response.data);
-        console.log("Data saved successfully!");
+        console.log(todoList);
       })
       .catch((error) => {
         console.error("Error saving data: ", error);
       });
   }
-
+  function test() {
+    console.log(todoList[0]);
+  }
   return (
     <div className="App">
       <div className="container">
@@ -54,7 +47,16 @@ function App() {
             type="text"
           />
           <button onClick={addTest}>Submit</button>
-          {/* <p>{inputValue}</p> */}
+          <button onClick={test}>test</button>
+          {todoList.length === 0 ? (
+            <p>No data yet</p>
+          ) : (
+            <ul>
+              {todoList[0].map((item, index) => (
+                <li key={index}>{item.text}</li>
+              ))}
+            </ul>
+          )}
         </div>
       </div>
     </div>
